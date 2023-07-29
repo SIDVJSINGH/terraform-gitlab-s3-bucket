@@ -9,9 +9,9 @@ variables:
 
 terraform_plan:
   stage: plan
-  image: hashicorp/terraform:latest
+  image: hashicorp/terraform:1.0.9
   script:
-    - cd terraform-gitlab-s3-bucket/
+    - cd .
     - terraform --version
     - terraform init
     - terraform validate
@@ -19,18 +19,18 @@ terraform_plan:
 
 terraform_apply:
   stage: apply
-  image: hashicorp/terraform:latest
+  image: hashicorp/terraform:1.0.9
   script:
-    - cd terraform-gitlab-s3-bucket/
+    - cd .
     - terraform --version
     - terraform init
     - terraform apply -auto-approve
 
 terraform_destroy:
   stage: destroy
-  image: hashicorp/terraform:latest
+  image: hashicorp/terraform:1.0.9
   script:
-    - cd terraform-gitlab-s3-bucket/
+    - cd .
     - terraform --version
     - terraform init
     - terraform destroy -auto-approve
