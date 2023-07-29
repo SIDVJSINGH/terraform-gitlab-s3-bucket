@@ -13,8 +13,6 @@ terraform_plan:
   script:
     - terraform init
     - terraform plan
-  only:
-    - master
 
 terraform_apply:
   stage: apply
