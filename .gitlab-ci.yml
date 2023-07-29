@@ -1,15 +1,12 @@
-#.gitlab-ci.yml
-
 stages:
   - plan
   - apply
   - destroy
 
 variables:
-  AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
-  AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
-  TF_WORKING_DIR: "."
-
+  AWS_ACCESS_KEY_ID: "$AWS_ACCESS_KEY_ID"
+  AWS_SECRET_ACCESS_KEY: "$AWS_SECRET_ACCESS_KEY"
+  TF_WORKING_DIR: "path/to/terraform/files"
 terraform_plan:
   stage: plan
   image: hashicorp/terraform:latest
@@ -25,10 +22,16 @@ terraform_apply:
   image: hashicorp/terraform:latest
   script:
     - cd $TF_WORKING_DIR
+    - terraform --version
+    - terraform init
     - terraform apply -auto-approve
 
 terraform_destroy:
   stage: destroy
+  image: hashicorp/terraform:latest
   script:
+    - cd $TF_WORKING_DIR
+    - terraform --version
+    - terraform init
     - terraform destroy -auto-approve
   when: manual
