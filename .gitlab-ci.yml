@@ -24,7 +24,8 @@ deploy:
   extends: .terraform:deploy
   when: on_success
 
-cleanup:
+terraform_cleanup:
+  stage: cleanup
   script:
     - gitlab-terraform destroy -auto-approve
   when: manual
