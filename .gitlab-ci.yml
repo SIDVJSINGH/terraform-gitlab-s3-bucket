@@ -12,7 +12,7 @@ stages:
   - validate
   - build
   - deploy
-  - cleanup
+  - destroy
 
 validate:
   extends: .terraform:validate
@@ -26,4 +26,6 @@ terraform_deploy:
     - gitlab-terraform apply -auto-approve
 
 cleanup:
-  extends: .terraform:destroy
+  stage: destroy
+  script:
+    - gitlab-terraform destroy -auto-approve
