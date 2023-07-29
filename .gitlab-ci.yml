@@ -22,7 +22,7 @@ build:
 
 deploy:
   extends: .terraform:deploy
-  when: on_successful
+  when: on_success
 
 cleanup:
   script:
