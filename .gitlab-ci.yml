@@ -7,7 +7,7 @@ variables:
   AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
   AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
 
-plan:
+terraform_plan:
   stage: plan
   image: hashicorp/terraform:latest
   script:
@@ -16,13 +16,13 @@ plan:
   only:
     - master
 
-apply:
+terraform_apply:
   stage: apply
   image: hashicorp/terraform:latest
   script:
     - terraform apply -auto-approve
 
-destroy:
+terraform_destroy:
   stage: destroy
   script:
     - terraform destroy -auto-approve
