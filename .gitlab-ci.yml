@@ -1,0 +1,29 @@
+# .gitlab-ci.yml
+
+stages:
+  - plan
+  - apply
+  - destroy
+
+variables:
+  AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+  AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+
+terraform_init:
+  stage: plan
+  image: hashicorp/terraform:latest
+  script:
+    - terraform init
+    - terraform plan
+
+terraform_apply:
+  stage: apply
+  image: hashicorp/terraform:latest
+  script:
+    - terraform apply -auto-approve
+
+terraform_destroy:
+  stage: destroy
+  script:
+    - terraform destroy -auto-approve
+  when: manual
