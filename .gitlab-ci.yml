@@ -1,7 +1,5 @@
 stages:
   - plan
-  - apply
-  - destroy
 
 variables:
   AWS_ACCESS_KEY_ID: "$AWS_ACCESS_KEY_ID"
@@ -16,22 +14,3 @@ terraform_plan:
     - terraform init
     - terraform validate
     - terraform plan
-
-terraform_apply:
-  stage: apply
-  image: hashicorp/terraform:1.0.9
-  script:
-    - cd .
-    - terraform --version
-    - terraform init
-    - terraform apply -auto-approve
-
-terraform_destroy:
-  stage: destroy
-  image: hashicorp/terraform:1.0.9
-  script:
-    - cd .
-    - terraform --version
-    - terraform init
-    - terraform destroy -auto-approve
-  when: manual
