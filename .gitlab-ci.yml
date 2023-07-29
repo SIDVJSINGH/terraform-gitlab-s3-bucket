@@ -5,10 +5,6 @@ stages:
   - apply
   - destroy
 
-variables:
-  AWS_ACCESS_KEY_ID: "AKIARQSGNPPR2YLUZMYX"
-  AWS_SECRET_ACCESS_KEY: "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"
-
 terraform_plan:
   stage: plan
   image: hashicorp/terraform:latest
