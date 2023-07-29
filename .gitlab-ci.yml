@@ -1,16 +1,29 @@
-stages:
-  - plan
+include:
+  - template: Terraform/Base.gitlab-ci.yml
+  - template: Jobs/SAST-IaC.gitlab-ci.yml
 
 variables:
   AWS_ACCESS_KEY_ID: "$AWS_ACCESS_KEY_ID"
   AWS_SECRET_ACCESS_KEY: "$AWS_SECRET_ACCESS_KEY"
 
-terraform_plan:
-  stage: plan
-  image: hashicorp/terraform:1.0.9
-  script:
-    - cd .
-    - terraform --version
-    - terraform init
-    - terraform validate
-    - terraform plan
+stages:
+  - validate
+  - test
+  - build
+  - deploy
+
+fmt:
+  extends: .terraform:fmt
+  needs: []
+
+validate:
+  extends: .terraform:validate
+  needs: []
+
+build:
+  extends: .terraform:build
+
+deploy:
+  extends: .terraform:deploy
+  dependencies:
+    - build
