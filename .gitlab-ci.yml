@@ -7,9 +7,9 @@ variables:
 
 stages:
   - validate
-  - test
   - build
   - deploy
+  - cleanup
 
 fmt:
   extends: .terraform:fmt
@@ -24,5 +24,7 @@ build:
 
 deploy:
   extends: .terraform:deploy
-  dependencies:
-    - build
+
+cleanup:
+ extends: .terraform:destroy
+  when: manual
