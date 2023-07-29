@@ -1,31 +1,35 @@
-# .gitlab-ci.yml
-# file is working with a pre-defined template
-
-include:
-  - template: Terraform/Base.gitlab-ci.yml
+stages:
+  - plan
+  - apply
+  - destroy
 
 variables:
   AWS_ACCESS_KEY_ID: "$AWS_ACCESS_KEY_ID"
   AWS_SECRET_ACCESS_KEY: "$AWS_SECRET_ACCESS_KEY"
 
-stages:
-  - validate
-  - build
-  - deploy
-  - cleanup
+terraform_plan:
+  stage: plan
+  image:
+    name: registry.gitlab.com/gitlab-org/terraform-images/releases/1.4:v1.0.0
+    entrypoint: [""]
+  script:
+    - gitlab-terraform init
+    - gitlab-terraform validate
+    - gitlab-terraform plan
 
-validate:
-  extends: .terraform:validate
+terraform_apply:
+  stage: apply
+  image:
+    name: registry.gitlab.com/gitlab-org/terraform-images/releases/1.4:v1.0.0
+    entrypoint: [""]
+  script:
+    - gitlab-terraform apply -auto-approve
 
-build:
-  extends: .terraform:build
-
-deploy:
-  extends: .terraform:deploy
-  when: on_success
-
-terraform_cleanup:
-  stage: cleanup
+terraform_destroy:
+  stage: destroy
+  image:
+    name: registry.gitlab.com/gitlab-org/terraform-images/releases/1.4:v1.0.0
+    entrypoint: [""]
   script:
     - gitlab-terraform destroy -auto-approve
   when: manual
