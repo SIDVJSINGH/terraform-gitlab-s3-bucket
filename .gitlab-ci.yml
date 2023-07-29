@@ -26,5 +26,5 @@ deploy:
   extends: .terraform:deploy
 
 cleanup:
- extends: .terraform:destroy
+  extends: .terraform:destroy
   when: manual
