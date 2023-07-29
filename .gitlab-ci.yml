@@ -1,13 +1,11 @@
-# .gitlab-ci.yml
-
 stages:
   - plan
   - apply
   - destroy
 
 variables:
-  AWS_ACCESS_KEY_ID: "AKIARQSGNPPR2YLUZMYX"
-  AWS_SECRET_ACCESS_KEY: "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"
+  AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+  AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
 
 terraform_plan:
   stage: plan
