@@ -8,18 +8,23 @@ stages:
 variables:
   AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
   AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+  TF_WORKING_DIR: "."
 
 terraform_plan:
   stage: plan
   image: hashicorp/terraform:latest
   script:
+    - cd $TF_WORKING_DIR
+    - terraform --version
     - terraform init
+    - terraform validate
     - terraform plan
 
 terraform_apply:
   stage: apply
   image: hashicorp/terraform:latest
   script:
+    - cd $TF_WORKING_DIR
     - terraform apply -auto-approve
 
 terraform_destroy:
