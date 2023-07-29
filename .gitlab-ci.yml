@@ -6,8 +6,8 @@ stages:
   - destroy
 
 variables:
-  AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
-  AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+  AWS_ACCESS_KEY_ID: "AKIARQSGNPPR2YLUZMYX"
+  AWS_SECRET_ACCESS_KEY: "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"
 
 terraform_plan:
   stage: plan
