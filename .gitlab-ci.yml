@@ -1,6 +1,3 @@
-# .gitlab-ci.yml
-# file is working with a pre-defined template
-
 include:
   - template: Terraform/Base.gitlab-ci.yml
 
@@ -28,5 +25,6 @@ terraform_deploy:
 cleanup:
   stage: destroy
   script:
+    - gitlab-terraform init
     - gitlab-terraform destroy -auto-approve
   when: manual
