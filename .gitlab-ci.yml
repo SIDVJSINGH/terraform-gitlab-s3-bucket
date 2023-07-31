@@ -21,10 +21,3 @@ terraform_deploy:
   stage: deploy
   script:
     - gitlab-terraform apply -auto-approve
-
-cleanup:
-  stage: destroy
-  script:
-    - gitlab-terraform init
-    - gitlab-terraform destroy -auto-approve
-  when: manual
